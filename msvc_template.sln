@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "myproject", "myproject\myproject.vcxproj", "{7DEC97D1-15FD-4882-8F2C-D27D44762740}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug-clang|x64 = Debug-clang|x64
+		Debug-clang|x86 = Debug-clang|x86
+		Debug-mingw|x64 = Debug-mingw|x64
+		Debug-mingw|x86 = Debug-mingw|x86
+		Debug-msvc|x64 = Debug-msvc|x64
+		Debug-msvc|x86 = Debug-msvc|x86
+		RelDbg-clang|x64 = RelDbg-clang|x64
+		RelDbg-clang|x86 = RelDbg-clang|x86
+		RelDbg-mingw|x64 = RelDbg-mingw|x64
+		RelDbg-mingw|x86 = RelDbg-mingw|x86
+		RelDbg-msvc|x64 = RelDbg-msvc|x64
+		RelDbg-msvc|x86 = RelDbg-msvc|x86
+		Release-clang|x64 = Release-clang|x64
+		Release-clang|x86 = Release-clang|x86
+		Release-mingw|x64 = Release-mingw|x64
+		Release-mingw|x86 = Release-mingw|x86
+		Release-msvc|x64 = Release-msvc|x64
+		Release-msvc|x86 = Release-msvc|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-clang|x64.ActiveCfg = Debug-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-clang|x64.Build.0 = Debug-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-clang|x86.ActiveCfg = Debug-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-clang|x86.Build.0 = Debug-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-mingw|x64.ActiveCfg = Debug-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-mingw|x64.Build.0 = Debug-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-mingw|x86.ActiveCfg = Debug-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-mingw|x86.Build.0 = Debug-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x64.ActiveCfg = Debug-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x64.Build.0 = Debug-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x86.ActiveCfg = Debug-msvc|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x86.Build.0 = Debug-msvc|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-clang|x64.ActiveCfg = RelDbg-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-clang|x64.Build.0 = RelDbg-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-clang|x86.ActiveCfg = RelDbg-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-clang|x86.Build.0 = RelDbg-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-mingw|x64.ActiveCfg = RelDbg-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-mingw|x64.Build.0 = RelDbg-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-mingw|x86.ActiveCfg = RelDbg-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-mingw|x86.Build.0 = RelDbg-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x64.ActiveCfg = RelDbg-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x64.Build.0 = RelDbg-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x86.ActiveCfg = RelDbg-msvc|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x86.Build.0 = RelDbg-msvc|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-clang|x64.ActiveCfg = Release-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-clang|x64.Build.0 = Release-clang|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-clang|x86.ActiveCfg = Release-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-clang|x86.Build.0 = Release-clang|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-mingw|x64.ActiveCfg = Release-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-mingw|x64.Build.0 = Release-mingw|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-mingw|x86.ActiveCfg = Release-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-mingw|x86.Build.0 = Release-mingw|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x64.ActiveCfg = Release-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x64.Build.0 = Release-msvc|x64
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x86.ActiveCfg = Release-msvc|Win32
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x86.Build.0 = Release-msvc|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DB2C1649-F7F5-4640-8DCD-48DD61DF69C9}
+	EndGlobalSection
+EndGlobal
