@@ -14,4 +14,5 @@ int main()
 	{
 		puts( e.what() );
 	}
+	return 0;
 }
