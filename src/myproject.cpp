@@ -6,5 +6,12 @@ ENABLE_INTELLISENSE
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	try
+	{
+		std::cout << "Hello World!\n";
+	}
+	catch (const std::exception& e)
+	{
+		puts( e.what() );
+	}
 }
