@@ -94,10 +94,10 @@
         <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
         <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
       </PropertyGroup>
-	  <PropertyGroup Label="Configuration">
-	    <PlatformToolset>WSL2_1_0</PlatformToolset>
-		<UseOfStl>libstdc++_static</UseOfStl>
-	  </PropertyGroup>
+      <PropertyGroup Label="Configuration">
+        <PlatformToolset>WSL2_1_0</PlatformToolset>
+        <UseOfStl>libstdc++_static</UseOfStl>
+      </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup Label="Globals">
@@ -105,17 +105,17 @@
         <VCProjectVersion>17.0</VCProjectVersion>
         <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
       </PropertyGroup>
-	  <PropertyGroup Label="Configuration">
-	    <ConfigurationType>Application</ConfigurationType>
-		<CharacterSet>Unicode</CharacterSet>
-		<PreferredToolArchitecture>x64</PreferredToolArchitecture>
-		<UseDebugLibraries Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='Debug-msvc'">true</UseDebugLibraries>
-		<UseDebugLibraries Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">false</UseDebugLibraries>
-		<PlatformToolset Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang'">ClangCL</PlatformToolset>
-		<PlatformToolset Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">v143</PlatformToolset>
-		<WholeProgramOptimization Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</WholeProgramOptimization>
-		<EnableUnitySupport Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableUnitySupport>
-	  </PropertyGroup>
+      <PropertyGroup Label="Configuration">
+        <ConfigurationType>Application</ConfigurationType>
+        <CharacterSet>Unicode</CharacterSet>
+        <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+        <UseDebugLibraries Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='Debug-msvc'">true</UseDebugLibraries>
+        <UseDebugLibraries Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">false</UseDebugLibraries>
+        <PlatformToolset Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang'">ClangCL</PlatformToolset>
+        <PlatformToolset Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">v143</PlatformToolset>
+        <WholeProgramOptimization Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</WholeProgramOptimization>
+        <EnableUnitySupport Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableUnitySupport>
+      </PropertyGroup>
     </Otherwise>
   </Choose>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -131,7 +131,8 @@
     <OutDir>$(ProjectDir)build\$(Configuration)_$(PlatformTarget)\</OutDir>
     <IntDir>$(ProjectDir)build\$(Configuration)_$(PlatformTarget)\obj\</IntDir>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
-    <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
+    <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
+	<RunCodeAnalysis Condition="'$(Configuration)'=='Release-msvc' or '$(Configuration)'=='Release-clang'">true</RunCodeAnalysis>
     <TargetExt Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">.exe</TargetExt>
     <RemoteCCompileToolExe Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">x86_64-w64-mingw32-mingw</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">x86_64-w64-mingw32-g++</RemoteCppCompileToolExe>
@@ -146,7 +147,7 @@
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories >include\myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
