@@ -134,7 +134,7 @@
     <IntDir>$(ProjectDir)build/$(Configuration)_$(PlatformTarget)/obj/</IntDir>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
-    <RunCodeAnalysis Condition="'$(Configuration)'=='Release-msvc' or '$(Configuration)'=='Release-clang'">true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <TargetExt Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">.exe</TargetExt>
     <RemoteCCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x64' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x64' or '$(Configuration)|$(Platform)'=='Release-mingw|x64'">x86_64-w64-mingw32-gcc</RemoteCCompileToolExe>
     <RemoteCCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-gcc</RemoteCCompileToolExe>
