@@ -95,7 +95,7 @@
         <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
       </PropertyGroup>
       <PropertyGroup Label="Configuration">
-	    <UseDebugLibraries Condition="'$(Configuration)'=='Debug-mingw'">true</UseDebugLibraries>
+        <UseDebugLibraries Condition="'$(Configuration)'=='Debug-mingw'">true</UseDebugLibraries>
         <UseDebugLibraries Condition="'$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">false</UseDebugLibraries>
         <PlatformToolset>WSL2_1_0</PlatformToolset>
         <UseOfStl>libstdc++_static</UseOfStl>
@@ -134,14 +134,24 @@
     <IntDir>$(ProjectDir)build\$(Configuration)_$(PlatformTarget)\obj\</IntDir>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
-	<RunCodeAnalysis Condition="'$(Configuration)'=='Release-msvc' or '$(Configuration)'=='Release-clang'">true</RunCodeAnalysis>
-    <TargetExt Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">.exe</TargetExt>	
+    <RunCodeAnalysis Condition="'$(Configuration)'=='Release-msvc' or '$(Configuration)'=='Release-clang'">true</RunCodeAnalysis>
+    <TargetExt Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">.exe</TargetExt>
     <RemoteCCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x64' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x64' or '$(Configuration)|$(Platform)'=='Release-mingw|x64'">x86_64-w64-mingw32-gcc</RemoteCCompileToolExe>
     <RemoteCCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-gcc</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x64' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x64' or '$(Configuration)|$(Platform)'=='Release-mingw|x64'">x86_64-w64-mingw32-g++</RemoteCppCompileToolExe>
     <RemoteCppCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x64' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x64' or '$(Configuration)|$(Platform)'=='Release-mingw|x64'">x86_64-w64-mingw32-g++</RemoteLdToolExe>
     <RemoteLdToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-g++</RemoteLdToolExe>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+    <VcpkgAutoLink>false</VcpkgAutoLink>
+    <VcpkgAdditionalInstallOptions />
+    <VcpkgHostTriplet Condition="'$(Configuration)'!='Debug-mingw' and '$(Configuration)'!='RelDbg-mingw' and '$(Configuration)'!='Release-mingw'">$(PlatformTarget)-windows</VcpkgHostTriplet>
+    <VcpkgHostTriplet Condition="'$(Configuration)'=='Debug-mingw'  or '$(Configuration)'=='RelDbg-mingw'  or '$(Configuration)'=='Release-mingw'">$(PlatformTarget)-mingw</VcpkgHostTriplet>
+    <VcpkgTriplet Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang'">$(PlatformTarget)-windows</VcpkgTriplet>
+    <VcpkgTriplet Condition="'$(Configuration)'=='Debug-msvc'  or '$(Configuration)'=='RelDbg-msvc'  or '$(Configuration)'=='Release-msvc'">$(PlatformTarget)-windows</VcpkgTriplet>
+    <VcpkgTriplet Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">$(PlatformTarget)-mingw</VcpkgTriplet>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -151,8 +161,12 @@
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>include\myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\myproject;$(ProjectDir)src;$(ProjectDir)vcpkg_installed\$(VcpkgHostTriplet)\$(VcpkgTriplet)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+	  <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='Debug-mingw'">$(ProjectDir)vcpkg_installed\$(VcpkgHostTriplet)\$(VcpkgTriplet)\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <AdditionalLibraryDirectories Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">$(ProjectDir)vcpkg_installed\$(VcpkgHostTriplet)\$(VcpkgTriplet)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>	
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
   <Choose>
