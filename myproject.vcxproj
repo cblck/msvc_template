@@ -142,14 +142,6 @@
     <RemoteCppCompileToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-g++</RemoteCppCompileToolExe>
     <RemoteLdToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x64' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x64' or '$(Configuration)|$(Platform)'=='Release-mingw|x64'">x86_64-w64-mingw32-g++</RemoteLdToolExe>
     <RemoteLdToolExe Condition="'$(Configuration)|$(Platform)'=='Debug-mingw|x86' or '$(Configuration)|$(Platform)'=='RelDbg-mingw|x86' or '$(Configuration)|$(Platform)'=='Release-mingw|x86'">i686-w64-mingw32-g++</RemoteLdToolExe>
-    <AdditionalSourcesToCopyMapping Condition="'$(Configuration)'=='Debug-mingw' or '$(Configuration)'=='RelDbg-mingw' or '$(Configuration)'=='Release-mingw'">$(ProjectDir)vcpkg.json;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-  </PropertyGroup>
-  <PropertyGroup Label="Vcpkg">
-    <VcpkgEnableManifest>true</VcpkgEnableManifest>
-    <VcpkgAutoLink>false</VcpkgAutoLink>
-    <VcpkgAdditionalInstallOptions />
-    <VcpkgHostTriplet>$(PlatformTarget)-windows</VcpkgHostTriplet>
-    <VcpkgTriplet>$(PlatformTarget)-windows</VcpkgTriplet>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -161,9 +153,9 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <AdditionalIncludeDirectories>$(ProjectDir)include/myproject;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-	<PreBuildEvent>
-	  <Command>copy /y "$(ProjectDir)\vcpkg_installed\.clang-tidy" "$(VCPKG_ROOT)\packages\.clang-tidy"</Command>
-	</PreBuildEvent>
+    <PreBuildEvent>
+      <Command></Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
   <Choose>
@@ -177,38 +169,38 @@
           <LanguageStandard_C>stdc17</LanguageStandard_C>
           <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
           <EnableEnhancedInstructionSet Condition="'$(Platform)'=='x64'">AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-          <AdditionalIncludeDirectories>$(ProjectDir)vcpkg_installed/$(VcpkgHostTriplet)/$(VcpkgTriplet)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+          <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
           <SubSystem>Console</SubSystem>
           <GenerateDebugInformation>true</GenerateDebugInformation>
           <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
-          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-msvc'">$(ProjectDir)vcpkg_installed/$(VcpkgHostTriplet)/$(VcpkgTriplet)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">$(ProjectDir)vcpkg_installed/$(VcpkgHostTriplet)/$(VcpkgTriplet)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-          <AdditionalDependencies Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-msvc'">fmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-          <AdditionalDependencies Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">fmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-msvc'">%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <AdditionalDependencies Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='Debug-msvc'">%(AdditionalDependencies)</AdditionalDependencies>
+          <AdditionalDependencies Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
       </ItemDefinitionGroup>
     </When>
     <Otherwise>
       <ItemDefinitionGroup>
         <RemotePreBuildEvent>
-          <Command>vcpkg install --host-triplet="$(PlatformTarget)-mingw-static"</Command>
+          <Command></Command>
         </RemotePreBuildEvent>
         <ClCompile>
           <CppLanguageStandard>c++20</CppLanguageStandard>
-		  <!-- Intellisense -->
-		  <AdditionalIncludeDirectories>$(ProjectDir)vcpkg_installed/$(PlatformTarget)-mingw-static/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-		  <!--  WSL  Build  -->
-          <AdditionalIncludeDirectories>$(VCPKG_ROOT)/packages/fmt_$(PlatformTarget)-mingw-static/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+          <!-- Intellisense -->
+          <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+          <!--  WSL  Build  -->
+          <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
           <Relocation />
           <NoExecStackRequired />
           <FunctionBinding>false</FunctionBinding>
           <AdditionalOptions>-static -static-libgcc -static-libstdc++ %(AdditionalOptions)</AdditionalOptions>
-		  <AdditionalDependencies Condition="'$(Configuration)'=='Debug-mingw'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-mingw-static/debug/lib/libfmtd.a;%(AdditionalDependencies)</AdditionalDependencies>
-		  <AdditionalDependencies Condition="'$(Configuration)'=='Reldbg-mingw' or '$(Configuration)'=='Release-mingw'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-mingw-static/lib/libfmt.a;%(AdditionalDependencies)</AdditionalDependencies>
+          <AdditionalDependencies Condition="'$(Configuration)'=='Debug-mingw'">%(AdditionalDependencies)</AdditionalDependencies>
+          <AdditionalDependencies Condition="'$(Configuration)'=='Reldbg-mingw' or '$(Configuration)'=='Release-mingw'">%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
       </ItemDefinitionGroup>
     </Otherwise>
