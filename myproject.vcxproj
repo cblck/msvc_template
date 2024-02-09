@@ -161,6 +161,9 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <AdditionalIncludeDirectories>$(ProjectDir)include/myproject;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+	<PreBuildEvent>
+	  <Command>copy /y "$(ProjectDir)\vcpkg_installed\.clang-tidy" "$(VCPKG_ROOT)\packages\.clang-tidy"</Command>
+	</PreBuildEvent>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
   <Choose>

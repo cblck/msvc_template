@@ -1,6 +1,7 @@
 # Build directories and binary files
 build/
 vcpkg_installed/
+!vcpkg_installed/clang.tidy
 
 # IDE files
 .vs/
