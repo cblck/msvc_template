@@ -16,8 +16,3 @@
 1. Install mingw in the default WSL Ubuntu distro: `sudo apt-get install gcc-mingw-w64 g++-mingw-w64 mingw-w64`
 
 
-### Adding a vcpkg package
-1. Update `vcpkg.json` with the package-name.
-1. Update `AdditionalIncludeDirectories` under `<!--  WSL  Build  -->` with the package-name.
-1. Update `AdditionalDependencies` with full path to the `.a` file (debug and release).
-
