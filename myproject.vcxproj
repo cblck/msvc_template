@@ -15,10 +15,20 @@
   <Import Project="$(VCTargetsPath)/Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
     <MyOutPath>build/$(Configuration)_$(PlatformTarget)</MyOutPath>
-	<RemoteOutDir>$(RemoteRootDir)/$(ProjectName)/$(MyOutPath)/</RemoteOutDir>
-	<RemoteIntDir>$(RemoteRootDir)/$(ProjectName)/$(MyOutPath)/obj/</RemoteIntDir>
+    <RemoteOutDir>$(RemoteRootDir)/$(ProjectName)/$(MyOutPath)/</RemoteOutDir>
+    <RemoteIntDir>$(RemoteRootDir)/$(ProjectName)/$(MyOutPath)/obj/</RemoteIntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)/Microsoft.Cpp.props" />
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+    <VcpkgAutoLink>false</VcpkgAutoLink>
+    <VcpkgAdditionalInstallOptions />
+    <VcpkgHostTriplet Condition="'$(Configuration)'!='Debug-gcc' and '$(Configuration)'!='RelDbg-gcc' and '$(Configuration)'!='Release-gcc'">$(PlatformTarget)-windows</VcpkgHostTriplet>
+    <VcpkgHostTriplet Condition="'$(Configuration)'=='Debug-gcc'  or '$(Configuration)'=='RelDbg-gcc'  or '$(Configuration)'=='Release-gcc'">$(PlatformTarget)-linux</VcpkgHostTriplet>
+    <VcpkgTriplet Condition="'$(Configuration)'!='Debug-gcc' and '$(Configuration)'!='RelDbg-gcc' and '$(Configuration)'!='Release-gcc'">$(PlatformTarget)-windows</VcpkgTriplet>
+    <VcpkgTriplet Condition="'$(Configuration)'=='Debug-gcc'  or '$(Configuration)'=='RelDbg-gcc'  or '$(Configuration)'=='Release-gcc'">$(PlatformTarget)-linux</VcpkgTriplet>
+    <VcpkgInstalledDir>external/$(VcpkgHostTriplet)</VcpkgInstalledDir>
+  </PropertyGroup>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
@@ -27,11 +37,13 @@
   <PropertyGroup Label="UserMacros" />
   <!-- [Clang, MSVC, GCC] -->
   <PropertyGroup>
-	<OutDir>$(MyOutPath)/</OutDir>
-	<IntDir>$(MyOutPath)/obj/</IntDir>
+    <OutDir>$(MyOutPath)/</OutDir>
+    <IntDir>$(MyOutPath)/obj/</IntDir>
+	<MyVcpkgPath>$(VcpkgInstalledDir)/$(VcpkgTriplet)</MyVcpkgPath>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <AdditionalSourcesToCopyMapping Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(ProjectDir)vcpkg.json;$(ProjectDir)vcpkg-configuration.json;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -41,7 +53,7 @@
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>include/myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include/myproject;src;$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
@@ -61,6 +73,10 @@
           <SubSystem>Console</SubSystem>
           <GenerateDebugInformation>true</GenerateDebugInformation>
           <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-clang'  or '$(Configuration)'=='Debug-msvc'">$(MyVcpkgPath)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'!='Debug-clang' and '$(Configuration)'!='Debug-msvc'">$(MyVcpkgPath)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <AdditionalDependencies Condition="'$(Configuration)'=='Debug-clang'  or '$(Configuration)'=='Debug-msvc'">fmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+          <AdditionalDependencies Condition="'$(Configuration)'!='Debug-clang' and '$(Configuration)'!='Debug-msvc'">fmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
       </ItemDefinitionGroup>
     </When>
@@ -68,13 +84,12 @@
       <ItemDefinitionGroup>
         <ClCompile>
           <CppLanguageStandard>c++20</CppLanguageStandard>
+          <!-- Intellisense: <AdditionalIncludeDirectories>external/$(PlatformTarget)-gcc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories> -->
+          <!--  WSL  Build: <AdditionalIncludeDirectories>$(VCPKG_ROOT)/packages/fmt_$(PlatformTarget)-gcc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>  -->
         </ClCompile>
         <Link>
-          <Relocation />
-          <NoExecStackRequired />
-          <FunctionBinding>false</FunctionBinding>
-          <AdditionalDependencies Condition="'$(Configuration)'=='Debug-gcc'">%(AdditionalDependencies)</AdditionalDependencies>
-          <AdditionalDependencies Condition="'$(Configuration)'!='Debug-gcc'">%(AdditionalDependencies)</AdditionalDependencies>
+          <!--<AdditionalDependencies Condition="'$(Configuration)'=='Debug-gcc'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-gcc/debug/lib/libfmtd.a;%(AdditionalDependencies)</AdditionalDependencies> -->
+          <!-- <AdditionalDependencies Condition="'$(Configuration)'!='Debug-gcc'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-gcc/lib/libfmt.a;%(AdditionalDependencies)</AdditionalDependencies> -->
         </Link>
       </ItemDefinitionGroup>
     </Otherwise>

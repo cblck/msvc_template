@@ -1,18 +1,11 @@
 #include "myproject.hpp"
 
 DISABLE_INTELLISENSE
-#include <iostream>
+#include <fmt/core.h>
 ENABLE_INTELLISENSE
 
 int main()
 {
-    try
-    {
-        std::cout << "Hello World!\n";
-    }
-    catch ( const std::exception& e )
-    {
-        puts( e.what() );
-    }
+    fmt::print( "Hello World!\n" );
     return 0;
 }
