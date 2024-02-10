@@ -11,46 +11,11 @@
     <ProjectGuid>{7DEC97D1-15FD-4882-8F2C-D27D44762740}</ProjectGuid>
     <RootNamespace>myproject</RootNamespace>
   </PropertyGroup>
-  <Choose>
-    <When Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">
-      <PropertyGroup Label="Globals">
-        <Keyword>Linux</Keyword>
-        <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
-        <ApplicationType>Linux</ApplicationType>
-        <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
-        <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
-        <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
-      </PropertyGroup>
-      <PropertyGroup Label="Configuration">
-        <UseDebugLibraries Condition="'$(Configuration)'=='Debug-gcc'">true</UseDebugLibraries>
-        <UseDebugLibraries Condition="'$(Configuration)'!='Debug-gcc'">false</UseDebugLibraries>
-        <PlatformToolset>WSL2_1_0</PlatformToolset>
-		<RemoteRootDir>/home/cblck/projects</RemoteRootDir>
-      </PropertyGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup Label="Globals">
-        <Keyword>Win32Proj</Keyword>
-        <VCProjectVersion>17.0</VCProjectVersion>
-        <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-      </PropertyGroup>
-      <PropertyGroup Label="Configuration">
-        <ConfigurationType>Application</ConfigurationType>
-        <CharacterSet>Unicode</CharacterSet>
-        <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-        <UseDebugLibraries Condition="'$(Configuration)'=='Debug-clang'  or '$(Configuration)'=='Debug-msvc'">true</UseDebugLibraries>
-        <UseDebugLibraries Condition="'$(Configuration)'!='Debug-clang' and '$(Configuration)'!='Debug-msvc'">false</UseDebugLibraries>
-        <PlatformToolset Condition="'$(Configuration)'=='Debug-clang' or '$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang'">ClangCL</PlatformToolset>
-        <PlatformToolset Condition="'$(Configuration)'=='Debug-msvc'  or '$(Configuration)'=='RelDbg-msvc'  or '$(Configuration)'=='Release-msvc'">v143</PlatformToolset>
-        <WholeProgramOptimization Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</WholeProgramOptimization>
-        <EnableUnitySupport Condition="'$(Configuration)'=='RelDbg-clang' or '$(Configuration)'=='Release-clang' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableUnitySupport>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
+  <Import Project="data/ProjectGlobals.props" />
   <Import Project="$(VCTargetsPath)/Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">
-	<RemoteIntDir>$(RemoteRootDir)/$(ProjectName)/build/$(Configuration)_$(PlatformTarget)/obj/</RemoteIntDir>
 	<RemoteOutDir>$(RemoteRootDir)/$(ProjectName)/build/$(Configuration)_$(PlatformTarget)/</RemoteOutDir>
+	<RemoteIntDir>$(RemoteRootDir)/$(ProjectName)/build/$(Configuration)_$(PlatformTarget)/obj/</RemoteIntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)/Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -61,8 +26,8 @@
   <PropertyGroup Label="UserMacros" />
   <!-- [Clang, MSVC, GCC] -->
   <PropertyGroup>
-	<OutDir>$(ProjectDir)build/$(Configuration)_$(PlatformTarget)/</OutDir>
-	<IntDir>$(ProjectDir)build/$(Configuration)_$(PlatformTarget)/obj/</IntDir>
+	<OutDir>build/$(Configuration)_$(PlatformTarget)/</OutDir>
+	<IntDir>build/$(Configuration)_$(PlatformTarget)/obj/</IntDir>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
@@ -75,7 +40,7 @@
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(ProjectDir)include/myproject;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include/myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
