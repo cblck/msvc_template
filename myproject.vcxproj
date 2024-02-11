@@ -77,6 +77,7 @@
           <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
           <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-clang'  or '$(Configuration)'=='Debug-msvc'">$(MyVcpkgPath)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
           <AdditionalLibraryDirectories Condition="'$(Configuration)'!='Debug-clang' and '$(Configuration)'!='Debug-msvc'">$(MyVcpkgPath)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+		  <!-- Add '*.lib' files here -->
           <AdditionalDependencies Condition="'$(Configuration)'=='Debug-clang'  or '$(Configuration)'=='Debug-msvc'">fmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
           <AdditionalDependencies Condition="'$(Configuration)'!='Debug-clang' and '$(Configuration)'!='Debug-msvc'">fmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
@@ -92,7 +93,8 @@
         <Link>
           <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-gcc'">$(RemoteProjectDir)/$(MyVcpkgPath)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
           <AdditionalLibraryDirectories Condition="'$(Configuration)'!='Debug-gcc'">$(RemoteProjectDir)/$(MyVcpkgPath)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-          <LibraryDependencies Condition="'$(Configuration)'=='Debug-gcc'">fmtd</LibraryDependencies>
+          <!-- Add 'lib*.a' files here -->
+		  <LibraryDependencies Condition="'$(Configuration)'=='Debug-gcc'">fmtd</LibraryDependencies>
           <LibraryDependencies Condition="'$(Configuration)'!='Debug-gcc'">fmt</LibraryDependencies>
         </Link>
       </ItemDefinitionGroup>
@@ -124,12 +126,12 @@
     <When Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">
       <ItemDefinitionGroup>
         <RemotePreBuildEvent>
-          <!-- Multiple bash commands separated by "&& \n" -->
+          <!-- Call vcpkg from WSL -->
           <Command>cd "$(RemoteProjectDir)" &amp;&amp;
 vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
         </RemotePreBuildEvent>
         <RemotePostBuildEvent>
-          <!-- IntelliSense -->
+          <!-- Copy headers from WSL vcpkg for Host IntelliSense -->
           <Command>mkdir -p "$(MyVcpkgPath)" &amp;&amp; cp -r "$(RemoteProjectDir)/$(MyVcpkgPath)/include/" $_</Command>
         </RemotePostBuildEvent>
         <ClCompile>
