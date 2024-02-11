@@ -127,12 +127,11 @@
       <ItemDefinitionGroup>
         <RemotePreBuildEvent>
           <!-- Call vcpkg from WSL -->
-          <Command>cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+          <Command>cd "$(RemoteProjectDir)" &amp;&amp; vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
         </RemotePreBuildEvent>
         <RemotePostBuildEvent>
           <!-- Copy headers from WSL vcpkg for Host IntelliSense -->
-          <Command>mkdir -p "$(MyVcpkgPath)" &amp;&amp; cp -r "$(RemoteProjectDir)/$(MyVcpkgPath)/include/" $_</Command>
+          <Command>mkdir -p "$(MyVcpkgPath)" &amp;&amp; cp -u -r "$(RemoteProjectDir)/$(MyVcpkgPath)/include/" $_</Command>
         </RemotePostBuildEvent>
         <ClCompile>
           <CAdditionalWarning>extra;cast-align;conversion;double-promotion;duplicated-branches;duplicated-cond;format=2;implicit-fallthrough;logical-op;misleading-indentation;non-virtual-dtor;null-dereference;old-style-cast;overloaded-virtual;pedantic;shadow;sign-conversion;unused;useless-cast;no-unknown-pragmas;%(CAdditionalWarning)</CAdditionalWarning>
