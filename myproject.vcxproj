@@ -55,7 +55,7 @@
       <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>include/myproject;src;$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include/myproject;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
@@ -86,8 +86,8 @@
       <ItemDefinitionGroup>
         <ClCompile>
           <CppLanguageStandard>c++20</CppLanguageStandard>
-          <!-- Intellisense: <AdditionalIncludeDirectories>external/$(PlatformTarget)-gcc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories> -->
-          <!--  WSL  Build: <AdditionalIncludeDirectories>$(VCPKG_ROOT)/packages/fmt_$(PlatformTarget)-gcc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>  -->
+          <!-- IntelliSense -->
+          <AdditionalIncludeDirectories>$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
           <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-gcc'">$(RemoteProjectDir)/$(MyVcpkgPath)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -128,6 +128,10 @@
           <Command>cd "$(RemoteProjectDir)" &amp;&amp;
 vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
         </RemotePreBuildEvent>
+        <RemotePostBuildEvent>
+          <!-- IntelliSense -->
+          <Command>mkdir -p "$(MyVcpkgPath)" &amp;&amp; cp -r "$(RemoteProjectDir)/$(MyVcpkgPath)/include/" $_</Command>
+        </RemotePostBuildEvent>
         <ClCompile>
           <CAdditionalWarning>extra;cast-align;conversion;double-promotion;duplicated-branches;duplicated-cond;format=2;implicit-fallthrough;logical-op;misleading-indentation;non-virtual-dtor;null-dereference;old-style-cast;overloaded-virtual;pedantic;shadow;sign-conversion;unused;useless-cast;no-unknown-pragmas;%(CAdditionalWarning)</CAdditionalWarning>
           <CppAdditionalWarning>extra;cast-align;conversion;double-promotion;duplicated-branches;duplicated-cond;format=2;implicit-fallthrough;logical-op;misleading-indentation;non-virtual-dtor;null-dereference;old-style-cast;overloaded-virtual;pedantic;shadow;sign-conversion;unused;useless-cast;no-unknown-pragmas;%(CppAdditionalWarning)</CppAdditionalWarning>
