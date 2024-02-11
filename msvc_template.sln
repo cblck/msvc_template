@@ -33,8 +33,7 @@ Global
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-clang|x86.Build.0 = Debug-clang|Win32
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-gcc|x64.ActiveCfg = Debug-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-gcc|x64.Build.0 = Debug-gcc|x64
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-gcc|x86.ActiveCfg = Debug-gcc|x86
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-gcc|x86.Build.0 = Debug-gcc|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-gcc|x86.ActiveCfg = Debug-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x64.ActiveCfg = Debug-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x64.Build.0 = Debug-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Debug-msvc|x86.ActiveCfg = Debug-msvc|Win32
@@ -45,8 +44,7 @@ Global
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-clang|x86.Build.0 = RelDbg-clang|Win32
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-gcc|x64.ActiveCfg = RelDbg-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-gcc|x64.Build.0 = RelDbg-gcc|x64
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-gcc|x86.ActiveCfg = RelDbg-gcc|x86
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-gcc|x86.Build.0 = RelDbg-gcc|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-gcc|x86.ActiveCfg = RelDbg-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x64.ActiveCfg = RelDbg-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x64.Build.0 = RelDbg-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.RelDbg-msvc|x86.ActiveCfg = RelDbg-msvc|Win32
@@ -57,8 +55,7 @@ Global
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-clang|x86.Build.0 = Release-clang|Win32
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-gcc|x64.ActiveCfg = Release-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-gcc|x64.Build.0 = Release-gcc|x64
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-gcc|x86.ActiveCfg = Release-gcc|x86
-		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-gcc|x86.Build.0 = Release-gcc|x86
+		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-gcc|x86.ActiveCfg = Release-gcc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x64.ActiveCfg = Release-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x64.Build.0 = Release-msvc|x64
 		{7DEC97D1-15FD-4882-8F2C-D27D44762740}.Release-msvc|x86.ActiveCfg = Release-msvc|Win32

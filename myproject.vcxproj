@@ -44,7 +44,7 @@
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <AdditionalSourcesToCopyMapping Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(ProjectDir)vcpkg.json;$(ProjectDir)vcpkg-configuration.json;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-	<DebuggerWorkingDirectory Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(RemoteProjectDir)/$(OutDir)</DebuggerWorkingDirectory>
+    <DebuggerWorkingDirectory Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(RemoteProjectDir)/$(OutDir)</DebuggerWorkingDirectory>
     <DebuggerFlavor Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">LinuxWSLDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -57,61 +57,6 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <AdditionalIncludeDirectories>include/myproject;src;$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Link>
-      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <!-- Multiple bash commands separated by newlines -->
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
-    <RemotePreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
-vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
-    </RemotePreBuildEvent>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
   <Choose>
@@ -145,8 +90,10 @@ vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" -
           <!--  WSL  Build: <AdditionalIncludeDirectories>$(VCPKG_ROOT)/packages/fmt_$(PlatformTarget)-gcc/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>  -->
         </ClCompile>
         <Link>
-          <!--<AdditionalDependencies Condition="'$(Configuration)'=='Debug-gcc'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-gcc/debug/lib/libfmtd.a;%(AdditionalDependencies)</AdditionalDependencies> -->
-          <!-- <AdditionalDependencies Condition="'$(Configuration)'!='Debug-gcc'">/home/cblck/vcpkg/packages/fmt_$(PlatformTarget)-gcc/lib/libfmt.a;%(AdditionalDependencies)</AdditionalDependencies> -->
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'=='Debug-gcc'">$(RemoteProjectDir)/$(MyVcpkgPath)/debug/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <AdditionalLibraryDirectories Condition="'$(Configuration)'!='Debug-gcc'">$(RemoteProjectDir)/$(MyVcpkgPath)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+          <LibraryDependencies Condition="'$(Configuration)'=='Debug-gcc'">fmtd</LibraryDependencies>
+          <LibraryDependencies Condition="'$(Configuration)'!='Debug-gcc'">fmt</LibraryDependencies>
         </Link>
       </ItemDefinitionGroup>
     </Otherwise>
@@ -176,6 +123,11 @@ vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" -
     </When>
     <When Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">
       <ItemDefinitionGroup>
+        <RemotePreBuildEvent>
+          <!-- Multiple bash commands separated by "&& \n" -->
+          <Command>cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+        </RemotePreBuildEvent>
         <ClCompile>
           <CAdditionalWarning>extra;cast-align;conversion;double-promotion;duplicated-branches;duplicated-cond;format=2;implicit-fallthrough;logical-op;misleading-indentation;non-virtual-dtor;null-dereference;old-style-cast;overloaded-virtual;pedantic;shadow;sign-conversion;unused;useless-cast;no-unknown-pragmas;%(CAdditionalWarning)</CAdditionalWarning>
           <CppAdditionalWarning>extra;cast-align;conversion;double-promotion;duplicated-branches;duplicated-cond;format=2;implicit-fallthrough;logical-op;misleading-indentation;non-virtual-dtor;null-dereference;old-style-cast;overloaded-virtual;pedantic;shadow;sign-conversion;unused;useless-cast;no-unknown-pragmas;%(CppAdditionalWarning)</CppAdditionalWarning>

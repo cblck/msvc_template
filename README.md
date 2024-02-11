@@ -1,7 +1,6 @@
 ## msvc_template - msbuild
 - Attempt reap the benefits of [best practices cmake_template](https://github.com/cblck/cmake_template) within the VS2022 MSBuild ecosystem.
-- Target compilers: `clang-cl`, `cl (msvc)`, `gcc`.
-- Target architectures: `x86`, `x64`.
+- Targets: `clang-cl (x86, x64)`, `cl (x86, x64)`, `gcc (x64)`.
 
 
 ### Configurations
