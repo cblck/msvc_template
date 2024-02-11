@@ -85,7 +85,7 @@
     <Otherwise>
       <ItemDefinitionGroup>
         <ClCompile>
-          <CppLanguageStandard>c++20</CppLanguageStandard>
+          <CppLanguageStandard>c++2a</CppLanguageStandard>
           <!-- IntelliSense -->
           <AdditionalIncludeDirectories>$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
