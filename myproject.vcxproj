@@ -39,11 +39,13 @@
   <PropertyGroup>
     <OutDir>$(MyOutPath)/</OutDir>
     <IntDir>$(MyOutPath)/obj/</IntDir>
-	<MyVcpkgPath>$(VcpkgInstalledDir)/$(VcpkgTriplet)</MyVcpkgPath>
+    <MyVcpkgPath>$(VcpkgInstalledDir)/$(VcpkgTriplet)</MyVcpkgPath>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
     <EnableMicrosoftCodeAnalysis Condition="'$(Configuration)'=='Debug-msvc' or '$(Configuration)'=='RelDbg-msvc' or '$(Configuration)'=='Release-msvc'">true</EnableMicrosoftCodeAnalysis>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <AdditionalSourcesToCopyMapping Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(ProjectDir)vcpkg.json;$(ProjectDir)vcpkg-configuration.json;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+	<DebuggerWorkingDirectory Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">$(RemoteProjectDir)/$(OutDir)</DebuggerWorkingDirectory>
+    <DebuggerFlavor Condition="'$(Configuration)'=='Debug-gcc' or '$(Configuration)'=='RelDbg-gcc' or '$(Configuration)'=='Release-gcc'">LinuxWSLDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -55,6 +57,61 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <AdditionalIncludeDirectories>include/myproject;src;$(MyVcpkgPath)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <SharedLibrarySearchPath Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <!-- Multiple bash commands separated by newlines -->
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x64'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelDbg-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
+    <RemotePreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release-gcc|x86'">cd "$(RemoteProjectDir)" &amp;&amp;
+vcpkg install --host-triplet="$(VcpkgHostTriplet)" --triplet="$(VcpkgTriplet)" --x-install-root="$(VcpkgInstalledDir)"</Command>
+    </RemotePreBuildEvent>
   </ItemDefinitionGroup>
   <!-- [Clang/MSVC] [GCC] -->
   <Choose>
